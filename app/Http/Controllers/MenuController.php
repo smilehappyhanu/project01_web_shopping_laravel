@@ -30,4 +30,10 @@ class MenuController extends Controller
         ]);
         return redirect()->route('menus.index');
     }
+    public function edit ($id) {
+        $menu = $this->menu->find($id);
+        $optionSelect = $this->menuRecursive->MenuRecursiveEdit($menu->parent_id);
+        return view ('menu.edit',compact('menu','optionSelect'));
+    }
+ 
 }

@@ -64,6 +64,10 @@ Route::prefix('menu')->group(function () {
         "as" => "menus.edit",
         "uses" => "MenuController@edit"
     ]);
+    Route::post('/update/{id}', [
+        "as" => "menus.update",
+        "uses" => "MenuController@update"
+    ]);
     Route::get('/delete/{id}', [
         "as" => "menus.delete",
         "uses" => "MenuController@delete"
