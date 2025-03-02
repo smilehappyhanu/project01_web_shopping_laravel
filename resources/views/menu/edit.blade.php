@@ -16,7 +16,7 @@
       <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <form action="" method = "POST">
+                <form action="{{ route('menus.update', ['id' => $menu->id]) }}" method = "POST">
                     @csrf
                     <div class="form-group">
                         <label>Category name</label>

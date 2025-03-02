@@ -35,5 +35,16 @@ class MenuController extends Controller
         $optionSelect = $this->menuRecursive->MenuRecursiveEdit($menu->parent_id);
         return view ('menu.edit',compact('menu','optionSelect'));
     }
- 
+    public function update ($id, Request $request) {
+        $this->menu->find($id)->update([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => str_slug($request->name),
+        ]);
+        return redirect()->route('menus.index');
+    }
+    public function delete ($id) {
+        $this->menu->find($id)->delete();
+        return redirect()->route('menus.index');
+    }
 }
