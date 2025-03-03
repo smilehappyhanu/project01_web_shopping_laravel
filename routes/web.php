@@ -74,4 +74,16 @@ Route::prefix('admin')->group(function () {
             "uses" => "MenuController@delete"
         ]);
     });
+    // Route for product
+    Route::prefix('product')->group(function () {
+        Route::get('/', [
+            "as" => "products.index",
+            "uses" => "AdminProductController@index"
+        ]);
+        Route::get('/create', [
+            "as" => "products.create",
+            "uses" => "AdminProductController@create"
+        ]);
+        
+    });
 });
