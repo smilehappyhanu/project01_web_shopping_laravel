@@ -10,10 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route for admin side
+Route::get('/', 'AdminController@loginAdmin');
+Route::post('/', 'AdminController@handleLoginAdmin');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/home', function () {
     return view('home');
 });
