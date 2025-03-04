@@ -17,12 +17,13 @@ class AdminProductController extends Controller
         $recusive = new Recusive ($data); // create instance
         $htmlOption = $recusive->categoryRecusive($parentId);
         return $htmlOption;
-    }
+    } 
+
     public function index () {
         return view ('admin.product.index');
     }
     public function create () {
-        $htmlOption = $this->getCategory($parentId='');
-        return view ('admin.product.add', compact('htmlOption'));
+        $htmlOption =  $this->getCategory($parentId='');
+        return view ('admin.product.add',compact('htmlOption'));
     }
 }
