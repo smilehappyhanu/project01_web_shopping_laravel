@@ -46,7 +46,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Select category</label>
-                <select class="form-control product_category_select2" name="parent_id">
+                <select class="form-control product_category_select2" name="category_id">
                     <option value="0">Select category</option>
                       {!! $htmlOption !!}
                 </select>
@@ -56,7 +56,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Product description</label>
-              <textarea class="form-control tinymce5_init_content" name="content" row="3"></textarea>
+              <textarea class="form-control tinymce5_init_content" name="contents" row="3"></textarea>
             </div>
           </div>
           <div class="col-md-12">
