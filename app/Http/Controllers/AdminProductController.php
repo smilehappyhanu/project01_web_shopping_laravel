@@ -1,11 +1,11 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use App\Category;
 use App\Components\Recusive;
 use Illuminate\Http\Request;
-
+ 
 class AdminProductController extends Controller
 {
     private $category;
@@ -17,8 +17,8 @@ class AdminProductController extends Controller
         $recusive = new Recusive ($data); // create instance
         $htmlOption = $recusive->categoryRecusive($parentId);
         return $htmlOption;
-    } 
-
+    }
+ 
     public function index () {
         return view ('admin.product.index');
     }
