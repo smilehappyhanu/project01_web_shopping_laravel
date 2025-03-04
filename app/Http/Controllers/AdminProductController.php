@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Components\Recusive;
 use Illuminate\Http\Request;
+use App\Traits\StorageImageTrait;
  
 class AdminProductController extends Controller
 {
+    use StorageImageTrait;
     private $category;
     public function __construct (Category $category) {
         $this->category = $category;
@@ -27,7 +29,7 @@ class AdminProductController extends Controller
         return view ('admin.product.add',compact('htmlOption'));
     }
     public function store (Request $request) {
-        $fileName = $request->feature_image_path->getClientOriginalName();
-        $path = $request->file('feature_image_path')->storeAs('public/product',$fileName);
+        $dataUpload = $this->storageImageUpload($request,'feature_image_path','product');
+
     }
 }
