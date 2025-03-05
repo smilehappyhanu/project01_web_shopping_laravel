@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
  
 use App\Category;
 use App\Product;
+use App\ProductImage;
+use App\Tag;
+use App\ProductTag;
 
 use App\Components\Recusive;
 use Illuminate\Http\Request;
@@ -14,11 +17,16 @@ class AdminProductController extends Controller
     use StorageImageTrait;
     private $category;
     private $product;
+    private $productImage;
+    private $productTag;
+    private $tag;
    
-    public function __construct (Category $category,Product $product) {
+    public function __construct (Category $category,Product $product,ProductImage $productImage,ProductTag $productTag,Tag $tag) {
         $this->category = $category;
         $this->product = $product;
-       
+        $this->productImage = $productImage;
+        $this->productTag = $productTag;
+        $this->tag = $tag;    
     }
     public function getCategory ($parentId) {
         $data = $this->category->all();
@@ -59,5 +67,20 @@ class AdminProductController extends Controller
                 ]);
             }
         }
+        // Insert product tags
+        foreach ($request->tags as $tagItem) {
+            // insert to tags table => check exist or not to insert new record or get data
+            $tagInstance = $this->tag->firstOrCreate([
+                'name' => $tagItem,
+            ]);
+            $tagId[] = $tagInstance->id; // Due to loop => need define saving variable as a array
+            // insert to product_tags table
+            // $this->productTag->create([
+            //     'product_id' => $product->id,
+            //     'tag_id' => $tagInstance->id,
+            // ]);
+        };
+        $product->productTags()->attach($tagId);
+        return redirect()->route('products.index');
     }
 }

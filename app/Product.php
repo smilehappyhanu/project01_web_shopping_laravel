@@ -12,4 +12,8 @@ class Product extends Model
     public function productImages () {
         return $this->hasMany('App\ProductImage','product_id');
     }
+    // set relationship between product and tags
+    public function productTags () {
+        return $this->belongsToMany('App\Tag','product_tags','product_id','tag_id')->withTimestamps();
+    }
 }
