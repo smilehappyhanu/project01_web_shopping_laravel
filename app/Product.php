@@ -3,6 +3,8 @@
 namespace App;
 
 use App\ProductImage;
+use App\Category;
+use App\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -15,5 +17,9 @@ class Product extends Model
     // set relationship between product and tags
     public function productTags () {
         return $this->belongsToMany('App\Tag','product_tags','product_id','tag_id')->withTimestamps();
+    }
+    // set relationship between product and category
+    public function category() {
+        return $this->belongsTo(Category::class,'category_id');
     }
 }

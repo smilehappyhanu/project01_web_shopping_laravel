@@ -4,6 +4,10 @@
     <title>Product page</title>
 @endsection
 
+@section('css')
+<link href="{{ asset('adminside/product/list/list.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -31,26 +35,27 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($products as $productItem)
                 
                 <tr>
-                  <th scope="row"></th>
-                  <td></td>
-                  <td></td>
+                  <th scope="row">{{ $productItem->id }}</th>
+                  <td>{{ $productItem->name }}</td>
+                  <td>{{ number_format($productItem->price) }}</td>
                   <td>
-                    <img src="" alt="">
+                    <img src="{{ $productItem->feature_image_path }}" alt="{{ $productItem->feature_image_name }}" class="product_image">
                   </td>
-                  <td></td>
+                  <td>{{ optional($productItem->category)->name }}</td>
                   <td>
                     <a href="" class="btn btn-default">Edit</a>
                     <a href="" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
-                
+                @endforeach
               </tbody>
             </table>
           </div>
           <div class="col-md-12">
-           
+           {{ $products->links() }}
           </div>
         
         </div>
