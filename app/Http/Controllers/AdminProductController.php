@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use App\Category;
 use App\Product;
+
 use App\Components\Recusive;
 use Illuminate\Http\Request;
 use App\Traits\StorageImageTrait;
@@ -13,9 +14,11 @@ class AdminProductController extends Controller
     use StorageImageTrait;
     private $category;
     private $product;
+   
     public function __construct (Category $category,Product $product) {
         $this->category = $category;
         $this->product = $product;
+       
     }
     public function getCategory ($parentId) {
         $data = $this->category->all();
@@ -46,6 +49,15 @@ class AdminProductController extends Controller
             $dataProductCreate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
         }
         $product = $this->product->create($dataProductCreate);
-        dd($product);
+        // Insert data to product_images
+        if ($request->hasFile('image_path')) {
+            foreach ($request->image_path as $fileItem) {
+                $dataProductImageDetail = $this->storageImageUploadMultiple($fileItem,'product');
+                $product->productImages()->create([
+                    'image_path' => $dataProductImageDetail['file_path'],
+                    'image_name' => $dataProductImageDetail['file_name']
+                ]);
+            }
+        }
     }
 }
