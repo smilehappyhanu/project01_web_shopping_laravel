@@ -88,5 +88,9 @@ Route::prefix('admin')->group(function () {
             "as" => "products.store",
             "uses" => "AdminProductController@store"
         ]);
+        Route::get('/edit/{id}', [
+            "as" => "products.edit",
+            "uses" => "AdminProductController@edit"
+        ]);
     });
 });

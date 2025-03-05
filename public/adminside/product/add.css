@@ -7,3 +7,13 @@
 .select2-container--default .select2-selection--single .select2-selection__clear {
     margin-top: -6px;
 }
+
+/* CSS for edit product form */
+.product_image_detail {
+   width: 100%;
+   height: 130px;
+   object-fit: cover;
+}
+.container_image_detail, .feature_image {
+    margin-top:20px;
+}
