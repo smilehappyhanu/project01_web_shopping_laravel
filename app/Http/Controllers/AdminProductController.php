@@ -10,6 +10,7 @@ use App\ProductTag;
 
 use App\Components\Recusive;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductAddRequest;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Log;
 use Storage;
@@ -46,7 +47,7 @@ class AdminProductController extends Controller
         $htmlOption =  $this->getCategory($parentId='');
         return view ('admin.product.add',compact('htmlOption'));
     }
-    public function store (Request $request) {
+    public function store (ProductAddRequest $request) {
         try {
             DB::beginTransaction();
             $dataProductCreate = [
