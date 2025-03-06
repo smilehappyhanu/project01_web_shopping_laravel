@@ -1,8 +1,12 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Home page</title>
+    <title>Slider page</title>
 @endsection
+
+@section('css')
+<link href="{{ asset('adminside/slider/add/add.css') }}" rel="stylesheet" />
+@endsection 
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -16,19 +20,28 @@
       <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <form action="" method = "POST" enctype="multipart/form-data">
+                <form action="{{ route('sliders.store') }}" method = "POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label>Slider name</label>
-                        <input type="textbox" class="form-control" name="name" value="" placeholder="Enter slider name">
+                        <input type="textbox" class="form-control @error('slider_name') is-invalid @enderror" name="slider_name" value="{{ old('slider_name')}}" placeholder="Enter slider name">
+                        @error('slider_name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Slider description</label>
-                        <textarea class="form-control" name="description" row="3"></textarea>
+                        <textarea class="form-control @error('slider_description') is-invalid @enderror" name="slider_description" row="3">{{ old('slider_description')}}</textarea>
+                        @error('slider_description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Slider image</label>
-                        <input type="file" name="image_path" class="form-control-file">
+                        <input type="file" name="slider_image_path" class="form-control-file @error('slider_image_path') is-invalid @enderror">
+                        @error('slider_image_path')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary" >Submit</button>
                 </form>
