@@ -102,4 +102,72 @@ class AdminProductController extends Controller
         $htmlOption =  $this->getCategory($product->category_id);
         return view ('admin.product.edit',compact('htmlOption','product'));
     }
+    public function update (Request $request,$id) {
+        try {
+            DB::beginTransaction();
+            $dataProductUpdate = [
+                'name' => $request->name,
+                'price' => $request->price,
+                'content' => $request->contents,
+                'user_id' => auth()->id(), // user login
+                'category_id' => $request->category_id
+    
+            ];
+            $dataUploadFeatureImage = $this->storageImageUpload($request,'feature_image_path','product');
+            if (!empty($dataUploadFeatureImage)) {
+                $dataProductUpdate['feature_image_name'] = $dataUploadFeatureImage['file_name'];
+                $dataProductUpdate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
+            }
+            $this->product->find($id)->update($dataProductUpdate);
+            $product = $this->product->find($id);
+            // Insert data to product_images
+            if ($request->hasFile('image_path')) {
+                $this->productImage->where('product_id',$id)->delete();
+                foreach ($request->image_path as $fileItem) {
+                    $dataProductImageDetail = $this->storageImageUploadMultiple($fileItem,'product');
+                    $product->productImages()->create([
+                        'image_path' => $dataProductImageDetail['file_path'],
+                        'image_name' => $dataProductImageDetail['file_name']
+                    ]);
+                }
+            }
+            // Insert product tags
+            if (!empty($request->tags)) {
+                foreach ($request->tags as $tagItem) {
+                    // insert to tags table => check exist or not to insert new record or get data
+                    $tagInstance = $this->tag->firstOrCreate([
+                        'name' => $tagItem,
+                    ]);
+                    $tagId[] = $tagInstance->id; // Due to loop => need define saving variable as a array
+                    // insert to product_tags table
+                    // $this->productTag->create([
+                    //     'product_id' => $product->id,
+                    //     'tag_id' => $tagInstance->id,
+                    // ]);
+                };
+                $product->productTags()->sync($tagId);
+            }
+           
+            DB::commit();
+            return redirect()->route('products.index');
+        }catch (Exception $exception) {
+            DB::rollback();
+            Log::error('Message:'. $exception->getMessage(). 'Line:' . $exception->getLine());
+        }
+    }
+    public function delete ($id) {
+        try {
+            $this->product->find($id)->delete();
+            return response()->json([
+                'code' => '200',
+                'message' => 'Success',
+            ],200);
+        } catch (Exception $exception) {
+            Log::error('Message :' .$exception->getMessage() . 'Line:'. $exception->getLine());
+            return response()->json([
+                'code' => '500',
+                'message' => 'Failed',
+            ], 500);
+        }
+    }
 }

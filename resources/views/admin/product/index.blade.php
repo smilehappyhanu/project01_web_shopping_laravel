@@ -8,6 +8,11 @@
 <link href="{{ asset('adminside/product/list/list.css') }}" rel="stylesheet" />
 @endsection
 
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('adminside/product/list/list.js') }}"></script>
+@endsection
+
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -47,7 +52,12 @@
                   <td>{{ optional($productItem->category)->name }}</td>
                   <td>
                     <a href="{{ route('products.edit',['id' => $productItem->id] ) }}" class="btn btn-default">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a 
+                      href=" "
+                      data-url="{{ route('products.delete',['id' => $productItem->id]) }}" 
+                      class="btn btn-danger action_delete_product">
+                      Delete
+                    </a>
                   </td>
                 </tr>
                 @endforeach
@@ -67,4 +77,5 @@
   <!-- /.content-wrapper -->
 
  @endsection
+
   
