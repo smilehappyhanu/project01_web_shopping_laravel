@@ -23,7 +23,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            @if ($errors->any())
+ {{--           <!-- @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -31,16 +31,22 @@
                     @endforeach
                 </ul>
             </div>
-            @endif
+            @endif --> --}}
           </div>
           <div class="col-md-6">             
               <div class="form-group">
                 <label>Product name</label>
-                <input type="textbox" class="form-control" name="name" placeholder="Enter product name">
+                <input type="textbox" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Enter product name">
+                @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
               <div class="form-group">
                 <label>Product price</label>
-                <input type="textbox" class="form-control" name="price" placeholder="Enter product price">
+                <input type="textbox" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Enter product price">
+                @error('price')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
               <div class="form-group">
                 <label>Product avatar image</label>
@@ -57,17 +63,23 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Product category</label>
-                <select class="form-control product_category_select2" name="category_id">
+                <select class="form-control product_category_select2 @error('category_id') is-invalid @enderror" name="category_id">
                     {{--<option value="0">Select category</option> --}}
                       {!! $htmlOption !!}
                 </select>
+                @error('category_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
               <label>Product description</label>
-              <textarea class="form-control tinymce5_init_content" name="contents" row="3"></textarea>
+              <textarea class="form-control tinymce5_init_content @error('content') is-invalid @enderror" name="contents" row="3"></textarea>
+              @error('content')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
           </div>
           <div class="col-md-12">
