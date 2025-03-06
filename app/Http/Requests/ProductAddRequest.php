@@ -24,22 +24,20 @@ class ProductAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|unique:name|max:255|min:5',
+            'name' => 'bail|required|max:255|min:5',
             'price' => 'required',
             'category_id' => 'required',
-            'content' => 'required'
+            'contents' => 'required',
         ];
     }
     public function messages()
     {
         return [
             'name.required' => 'Product name is required',
-            'name.unique'  => 'Product name need unique',
             'name.max'  => 'Product name of maxlength is 255 characters',
             'name.min'  => 'Product name of minlength is 5 characters',
             'price.required'  => 'Price is required',
-            'category_id.required'  => 'Category is required',
-            'content.required'  => 'Description is required',
+            'contents.required'  => 'Description is required',
         ];
     }
 }
