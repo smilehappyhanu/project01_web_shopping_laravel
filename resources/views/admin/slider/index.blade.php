@@ -30,23 +30,23 @@
                 </tr>
               </thead>
               <tbody>
-             
+              @foreach ($sliders as $sliderItem)
                 <tr>
-                  <th scope="row"></th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <th scope="row">{{ $sliderItem->id }}</th>
+                  <td>{{ $sliderItem->name }}</td>
+                  <td><{{ $sliderItem->description }}/td>
+                  <td><img src="{{ $sliderItem->image_path }}" alt="{{ $sliderItem->image_name }}"></td>
                   <td>
                     <a href="" class="btn btn-default">Edit</a>
                     <a href="" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
-                
+              @endforeach
               </tbody>
             </table>
           </div>
           <div class="col-md-12">
-         
+            {{ $sliders->links() }}
           </div>
         
         </div>
