@@ -4,6 +4,11 @@
     <title>Slider page</title>
 @endsection
 
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('adminside/slider/list/list.js') }}"></script>
+@endsection
+
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -37,8 +42,8 @@
                   <td><{{ $sliderItem->description }}/td>
                   <td><img src="{{ $sliderItem->image_path }}" alt="{{ $sliderItem->image_name }}"></td>
                   <td>
-                    <a href="" class="btn btn-default">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a href="{{ route ('sliders.edit',['id' => $sliderItem->id]) }}" class="btn btn-default">Edit</a>
+                    <a href="" data-url="{{ route ('sliders.delete',['id' => $sliderItem->id]) }}" class="btn btn-danger action_delete_slider">Delete</a>
                   </td>
                 </tr>
               @endforeach
