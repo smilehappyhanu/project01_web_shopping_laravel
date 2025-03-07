@@ -44,7 +44,7 @@
                   <td>{{ $settingItem->config_value }}</td>
                   <td>
                     <a href="{{ route('settings.edit',['id' => $settingItem->id]) . '?type=' . $settingItem->type }}" class="btn btn-default">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a href="" data-url="{{ route('settings.delete',['id' => $settingItem->id]) }}" class="btn btn-danger action_delete_setting">Delete</a>
                   </td>
                 </tr>
                 @endforeach
@@ -64,4 +64,9 @@
   <!-- /.content-wrapper -->
 
  @endsection
+
+ @section('js')
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="{{ asset('adminside/main.js') }}"></script>
+@endsection
   

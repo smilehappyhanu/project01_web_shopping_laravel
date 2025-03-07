@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Setting;
 use Illuminate\Http\Request;
 use App\Http\Requests\AddSettingRequest;
+use App\Traits\DeleteModelTrait;
 
 class AdminSettingController extends Controller
 {
+    use DeleteModelTrait;
     private $setting;
     public function __construct (Setting $setting) {
         $this->setting = $setting;
@@ -37,5 +39,8 @@ class AdminSettingController extends Controller
             'config_value' => $request->config_value,
         ]);
         return redirect()->route('settings.index');
+    }
+    public function delete($id) {
+        return $this->deleteModelTrait($id,$this->setting);
     }
 }
