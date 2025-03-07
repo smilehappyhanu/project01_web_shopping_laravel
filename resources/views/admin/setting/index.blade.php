@@ -16,7 +16,15 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <a href="{{ route ('menus.create') }}" class="btn btn-success float-right m-2">Add setting</a>
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle m-2 float-right" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add setting
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button"><a href="{{ route ('settings.create') .'?type=Text'}}">Text</a></button>
+                <button class="dropdown-item" type="button"><a href="{{ route ('settings.create') .'?type=TextArea' }}">Textarea</a></button>
+            </div>
+            </div>
           </div>      
           <div class="col-md-12">
             <table class="table table-hover">
