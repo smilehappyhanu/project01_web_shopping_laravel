@@ -128,4 +128,12 @@ Route::prefix('admin')->group(function () {
             "uses" => "AdminSliderController@delete"
         ]);
     });
+    // Route for setting
+    Route::prefix('setting')->group(function () {
+        Route::get('/', [
+            "as" => "settings.index",
+            "uses" => "AdminSettingController@index"
+        ]);
+        
+    });
 });
