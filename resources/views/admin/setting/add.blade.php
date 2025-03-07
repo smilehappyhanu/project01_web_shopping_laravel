@@ -4,6 +4,9 @@
     <title>Setting page</title>
 @endsection
 
+@section('css')
+<link href="{{ asset('adminside/setting/add.css') }}" rel="stylesheet" />
+@endsection
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -16,21 +19,30 @@
       <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <form action="" method = "POST">
+                <form action="{{ route('settings.store') }}" method = "POST">
                     @csrf
                     <div class="form-group">
                         <label>Config key</label>
-                        <input type="textbox" class="form-control" name="config_key" value="" placeholder="Enter config value">
+                        <input type="textbox" class="form-control @error('config_key') is-invalid @enderror" name="config_key" value="{{ old('config_key') }}" placeholder="Enter config value">
+                        @error('config_key')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     @if(request()->type === 'Text')
                         <div class="form-group">
                             <label>Config value</label>
-                            <input type="textbox" class="form-control" name="config_value" value="" placeholder="Enter config value">
+                            <input type="textbox" class="form-control @error('config_value') is-invalid @enderror" name="config_value" value="{{ old('config_value') }}" placeholder="Enter config value">
+                            @error('config_value')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         @elseif(request()->type === 'TextArea')
                             <div class="form-group">
                                 <label>Config value</label>
-                                <textarea class="form-control" name="config_value" rows=5></textarea>
+                                <textarea class="form-control @error('config_value') is-invalid @enderror" name="config_value" rows=5><{{ old('config_value') }}/textarea>
+                                @error('config_value')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                     @endif
                     <button type="submit" class="btn btn-primary" >Submit</button>

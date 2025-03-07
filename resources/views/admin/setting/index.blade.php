@@ -37,22 +37,22 @@
                 </tr>
               </thead>
               <tbody>
-            
+                @foreach ($settings as $settingItem)
                 <tr>
-                  <th scope="row"></th>
-                  <td></td>
-                  <td></td>
+                  <th scope="row">{{ $settingItem->id }}</th>
+                  <td>{{ $settingItem->config_key }}</td>
+                  <td>{{ $settingItem->config_value }}</td>
                   <td>
                     <a href="" class="btn btn-default">Edit</a>
                     <a href="" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
-              
+                @endforeach
               </tbody>
             </table>
           </div>
           <div class="col-md-12">
-         
+         {{ $settings->links() }}
           </div>
         
         </div>
