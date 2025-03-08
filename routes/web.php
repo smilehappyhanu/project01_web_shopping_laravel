@@ -155,4 +155,12 @@ Route::prefix('admin')->group(function () {
             "uses" => "AdminSettingController@delete"
         ]);
     });
+        // Route for user
+        Route::prefix('user')->group(function () {
+            Route::get('/', [
+                "as" => "users.index",
+                "uses" => "AdminUserController@index"
+            ]);
+            
+        });
 });
