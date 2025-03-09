@@ -155,31 +155,38 @@ Route::prefix('admin')->group(function () {
             "uses" => "AdminSettingController@delete"
         ]);
     });
-        // Route for user
-        Route::prefix('user')->group(function () {
-            Route::get('/', [
-                "as" => "users.index",
-                "uses" => "AdminUserController@index"
-            ]);
-            Route::get('/create', [
-                "as" => "users.create",
-                "uses" => "AdminUserController@create"
-            ]);
-            Route::post('/store', [
-                "as" => "users.store",
-                "uses" => "AdminUserController@store"
-            ]);
-            Route::get('/edit/{id}', [
-                "as" => "users.edit",
-                "uses" => "AdminUserController@edit"
-            ]);
-            Route::post('/update/{id}', [
-                "as" => "users.update",
-                "uses" => "AdminUserController@update"
-            ]);
-            Route::get('/delete/{id}', [
-                "as" => "users.delete",
-                "uses" => "AdminUserController@delete"
-            ]);
-        });
+    // Route for user
+    Route::prefix('user')->group(function () {
+        Route::get('/', [
+            "as" => "users.index",
+            "uses" => "AdminUserController@index"
+        ]);
+        Route::get('/create', [
+            "as" => "users.create",
+            "uses" => "AdminUserController@create"
+        ]);
+        Route::post('/store', [
+            "as" => "users.store",
+            "uses" => "AdminUserController@store"
+        ]);
+        Route::get('/edit/{id}', [
+            "as" => "users.edit",
+            "uses" => "AdminUserController@edit"
+        ]);
+        Route::post('/update/{id}', [
+            "as" => "users.update",
+            "uses" => "AdminUserController@update"
+        ]);
+        Route::get('/delete/{id}', [
+            "as" => "users.delete",
+            "uses" => "AdminUserController@delete"
+        ]);
+    });
+    // Route for permission
+    Route::prefix('role')->group(function () {
+        Route::get('/', [
+            "as" => "roles.index",
+            "uses" => "AdminRoleController@index"
+        ]);
+    });
 });
