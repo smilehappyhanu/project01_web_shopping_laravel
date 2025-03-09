@@ -5,8 +5,13 @@
 @endsection
 
 @section('css')
-<link href="{{ asset('adminside/slider/add/add.css') }}" rel="stylesheet" />
+
 @endsection 
+
+@section('js')
+<script type="text/javascript" src="{{ asset('adminside/role/add/add.js') }}"></script>
+@endsection
+
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -37,7 +42,9 @@
                     <div class="card border-primary mb-3 col-md-12">
                         <div class="card-header">
                             <label>
-                                <input type="checkbox" value="{{ $permissionParentItem->id }}">
+                                <input type="checkbox" 
+                                       class="checkbox_wrapper"
+                                       value="{{ $permissionParentItem->id }}">
                             </label>
                             Module: {{ $permissionParentItem->name }}
                         </div>
@@ -46,7 +53,9 @@
                             <div class="card-body text-primary col-md-3">                         
                                 <h5 class="card-title">
                                     <label>
-                                        <input type="checkbox" name="permission_id[]" value="{{ $permissionChildrenItem->id }}">
+                                        <input type="checkbox" name="permission_id[]" 
+                                               class="checkbox_children"
+                                               value="{{ $permissionChildrenItem->id }}">
                                     </label>
                                     {{ $permissionChildrenItem->name }}
                                 </h5>                                   
