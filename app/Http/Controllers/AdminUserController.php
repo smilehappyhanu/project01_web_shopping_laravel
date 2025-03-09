@@ -42,4 +42,10 @@ class AdminUserController extends Controller
             DB::rollback();
         }
     }
+    public function edit($id) {
+        $user = $this->user->find($id);
+        $roles = $this->role->all();
+        $roleUser = $user->roles;
+        return view('admin.user.edit',compact('user','roles','roleUser'));
+    }
 }
