@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use DB;
+use Log;
 
 class AdminUserController extends Controller
 {
@@ -21,5 +24,22 @@ class AdminUserController extends Controller
     public function create () {
         $roles = $this->role->all();
         return view('admin.user.add',compact('roles'));
+    }
+    public function store(Request $request) {
+        try {
+            DB::beginTransaction();
+            $user = $this->user->create([
+                'name' => $request->user_name,
+                'email' => $request->user_email,
+                'password' => Hash::make($request->user_password),
+            ]);
+            $roleIds = $request->user_role_id;
+            $user->roles()->attach($roleIds);
+            DB::commit();
+            return redirect()->route('users.index');
+        } catch (Exception $exception) {
+            Log::error('Message: '. $exception->getMessage(). 'Line: ' .$exception->getLine());
+            DB::rollback();
+        }
     }
 }
