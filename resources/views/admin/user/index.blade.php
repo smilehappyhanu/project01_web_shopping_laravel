@@ -6,7 +6,7 @@
 
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('adminside/slider/list/list.js') }}"></script>
+<script src="{{ asset('adminside/main.js') }}"></script>
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
                   <td>{{ $user->email }}</td>
                   <td>
                     <a href="{{ route('users.edit',['id' => $user->id ]) }}" class="btn btn-default">Edit</a>
-                    <a href="" data-url="" class="btn btn-danger action_delete_slider">Delete</a>
+                    <a href="" data-url="{{ route('users.delete',['id' => $user->id ]) }}" class="btn btn-danger action_delete_user">Delete</a>
                   </td>
                 </tr>
               @endforeach

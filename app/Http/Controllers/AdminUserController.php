@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Log;
+use App\Traits\DeleteModelTrait;
 
 class AdminUserController extends Controller
 {
+    use DeleteModelTrait;
     private $user;
     private $role;
     public function __construct(User $user,Role $role) {
@@ -65,5 +67,8 @@ class AdminUserController extends Controller
             Log::error('Message: '. $exception->getMessage(). 'Line: ' .$exception->getLine());
             DB::rollback();
         }
+    }
+    public function delete($id) {
+        return $this->DeleteModelTrait($id,$this->user);
     }
 }
