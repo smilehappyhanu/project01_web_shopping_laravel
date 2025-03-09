@@ -32,27 +32,29 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="row">              
+                <div class="row"> 
+                    @foreach($permissionParents as $permissionParentItem)             
                     <div class="card border-primary mb-3 col-md-12">
                         <div class="card-header">
                             <label>
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="{{ $permissionParentItem->id }}">
                             </label>
-                            Module product
+                            Module: {{ $permissionParentItem->name }}
                         </div>
                         <div class="row">
-                        @for($i = 1; $i <= 4; $i++)
+                        @foreach($permissionParentItem->permissionChildren as $permissionChildrenItem)
                             <div class="card-body text-primary col-md-3">                         
                                 <h5 class="card-title">
                                     <label>
-                                        <input type="checkbox" value="">
+                                        <input type="checkbox" name="permission_id[]" value="{{ $permissionChildrenItem->id }}">
                                     </label>
-                                    Add product
+                                    {{ $permissionChildrenItem->name }}
                                 </h5>                                   
                             </div>
-                        @endfor  
+                        @endforeach 
                         </div>                       
-                    </div>              
+                    </div>  
+                    @endforeach            
                 </div>              
             </div>
             <button type="submit" class="btn btn-primary" >Submit</button>
