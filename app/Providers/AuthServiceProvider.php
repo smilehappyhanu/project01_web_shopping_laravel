@@ -25,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('category-list', function ($user) {
+            return $user->checkPermissionAccess(config('permissions.access.list-category')); // truyền lên giá trị key_code của permission 
+        });
+        Gate::define('menu-list', function ($user) {
+            return $user->checkPermissionAccess(config('permissions.access.list-menu')); // truyền lên giá trị key_code của permission 
+        });
     }
 }

@@ -24,11 +24,12 @@ Route::prefix('admin')->group(function () {
     Route::prefix('category')->group(function () {
         Route::get('/', [
             "as" => "categories.index",
-            "uses" => "CategoryController@index"
+            "uses" => "CategoryController@index",
+            "middleware" => "can:category-list"
         ]);
         Route::get('/create', [
             "as" => "categories.create",
-            "uses" => "CategoryController@create"
+            "uses" => "CategoryController@create",
         ]);
         Route::post('/store', [
             "as" => "categories.store",
@@ -51,7 +52,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('menu')->group(function () {
         Route::get('/', [
             "as" => "menus.index",
-            "uses" => "MenuController@index"
+            "uses" => "MenuController@index",
+            "middleware" => "can:menu-list"
         ]);
         Route::get('/create', [
             "as" => "menus.create",
