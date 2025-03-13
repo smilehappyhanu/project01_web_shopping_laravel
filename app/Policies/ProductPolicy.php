@@ -51,13 +51,13 @@ class ProductPolicy
      * @param  \App\Product  $product
      * @return mixed
      */
-    public function update(User $user,$id)
+    public function update(User $user)
     { 
         $product = Product::find($id);
         if ($user->checkPermissionAccess(config('permissions.access.edit-product')) && $user->id == $product->user_id) {
             return true;
         }
-        return false; 
+        return true; 
     }
 
     /**

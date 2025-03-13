@@ -50,7 +50,7 @@
                     <img src="{{ $productItem->feature_image_path }}" alt="{{ $productItem->feature_image_name }}" class="product_image">
                   </td>
                   <td>{{ optional($productItem->category)->name }}</td>
-                  <td>
+                  <td>                
                     <a href="{{ route('products.edit',['id' => $productItem->id] ) }}" class="btn btn-default">Edit</a>
                     <a 
                       href=" "
