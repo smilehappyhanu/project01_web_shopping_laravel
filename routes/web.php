@@ -184,7 +184,7 @@ Route::prefix('admin')->group(function () {
             "uses" => "AdminUserController@delete"
         ]);
     });
-    // Route for permission
+    // Route for role
     Route::prefix('role')->group(function () {
         Route::get('/', [
             "as" => "roles.index",
@@ -209,6 +209,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [
             "as" => "roles.delete",
             "uses" => "AdminRoleController@delete"
+        ]);
+    });
+    // Route for permission
+    Route::prefix('permission')->group(function () {
+        Route::get('/create', [
+            "as" => "permissions.create",
+            "uses" => "AdminPermissionController@create"
+        ]);
+        Route::post('/store', [
+            "as" => "permissions.store",
+            "uses" => "AdminPermissionController@store"
         ]);
     });
 });
