@@ -25,12 +25,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [
             "as" => "categories.index",
             "uses" => "CategoryController@index",
-            "middleware" => "can:category-list"
+            //"middleware" => "can:category-list"
         ]);
         Route::get('/create', [
             "as" => "categories.create",
             "uses" => "CategoryController@create",
-            "middleware" => "can:category-add"
+           // "middleware" => "can:category-add"
         ]);
         Route::post('/store', [
             "as" => "categories.store",
@@ -39,7 +39,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [
             "as" => "categories.edit",
             "uses" => "CategoryController@edit",
-            "middleware" => "can:category-edit"
+           // "middleware" => "can:category-edit"
         ]);
         Route::post('/update/{id}', [
             "as" => "categories.update",
@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [
             "as" => "categories.delete",
             "uses" => "CategoryController@delete",
-            "middleware" => "can:category-delete"
+           // "middleware" => "can:category-delete"
         ]);
     });
     // Route for menu
@@ -56,7 +56,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [
             "as" => "menus.index",
             "uses" => "MenuController@index",
-            "middleware" => "can:menu-list"
+           // "middleware" => "can:menu-list"
         ]);
         Route::get('/create', [
             "as" => "menus.create",
@@ -96,7 +96,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [
             "as" => "products.edit",
             "uses" => "AdminProductController@edit",
-            "middleware" => "can:product-edit,id"
+           // "middleware" => "can:product-edit,id"
         ]);
         Route::post('/update/{id}', [
             "as" => "products.update",
